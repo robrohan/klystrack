@@ -227,7 +227,8 @@ int main(int argc, char **argv)
 	default_settings();
 	load_config(TOSTRING(CONFIG_PATH), false);
 
-	domain = gfx_create_domain(VERSION_STRING, SDL_WINDOW_RESIZABLE|SDL_WINDOW_OPENGL|((mused.flags & WINDOW_MAXIMIZED)?SDL_WINDOW_MAXIMIZED:0), mused.window_w, mused.window_h, mused.pixel_scale);
+	// SDL_WINDOW_RESIZABLE|
+	domain = gfx_create_domain(VERSION_STRING, SDL_WINDOW_OPENGL|((mused.flags & WINDOW_MAXIMIZED)?SDL_WINDOW_MAXIMIZED:0), mused.window_w, mused.window_h, mused.pixel_scale);
 	domain->fps = 30;
 	domain->scale = mused.pixel_scale;
 	domain->window_min_w = 320;
@@ -341,18 +342,18 @@ int main(int argc, char **argv)
 
 						case SDL_WINDOWEVENT_RESIZED:
 							{
-							debug("SDL_WINDOWEVENT_RESIZED %dx%d", e.window.data1, e.window.data2);
+							// debug("SDL_WINDOWEVENT_RESIZED %dx%d", e.window.data1, e.window.data2);
 
-							domain->screen_w = my_max(320, e.window.data1 / domain->scale);
-							domain->screen_h = my_max(240, e.window.data2 / domain->scale);
+							// domain->screen_w = 1280; // my_max(320, e.window.data1 / domain->scale);
+							// domain->screen_h = 720; // my_max(240, e.window.data2 / domain->scale);
 
-							if (!(mused.flags & FULLSCREEN))
-							{
-								mused.window_w = domain->screen_w * domain->scale;
-								mused.window_h = domain->screen_h * domain->scale;
-							}
+							// if (!(mused.flags & FULLSCREEN))
+							// {
+							// 	mused.window_w = domain->screen_w * domain->scale;
+							// 	mused.window_h = domain->screen_h * domain->scale;
+							// }
 
-							gfx_domain_update(domain, false);
+							// gfx_domain_update(domain, false);
 							}
 							break;
 					}

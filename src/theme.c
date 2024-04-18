@@ -292,7 +292,8 @@ void load_theme(const char *name)
 	Bundle res;
 	char fullpath[3000] = {0};
 
-	snprintf(fullpath, sizeof(fullpath) - 1, "%s/res/%s", query_resource_directory(), tmpname);
+	// snprintf(fullpath, sizeof(fullpath) - 1, "%s/res/%s", query_resource_directory(), tmpname);
+	snprintf(fullpath, sizeof(fullpath) - 1, "./res/%s", tmpname);
 
 	debug("Loading theme '%s'", fullpath);
 
