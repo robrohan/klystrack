@@ -434,9 +434,9 @@ void pattern_view_inner(GfxDomain *dest_surface, const SDL_Rect *dest, const SDL
 		{
 			gfx_domain_set_clip(dest_surface, &track);
 			const int ah = dest->h + dest->y - row.y;
-			const int w = mused.vu_meter->surface->w;
+			const int wd = mused.vu_meter->surface->w;
 			const int h = my_min(mused.vu_meter->surface->h, mused.vis.cyd_env[channel] * ah / MAX_VOLUME);
-			SDL_Rect r = { track.x + track.w / 2 - w / 2 , row.y - h, w, h };
+			SDL_Rect r = { track.x + track.w / 2 - wd / 2 , row.y - h, wd, h };
 			SDL_Rect sr = { 0, mused.vu_meter->surface->h - h, mused.vu_meter->surface->w, h };
 			gfx_blit(mused.vu_meter, &sr, dest_surface, &r);
 		}
@@ -449,20 +449,20 @@ void pattern_view_inner(GfxDomain *dest_surface, const SDL_Rect *dest, const SDL
 	
 	if (mused.focus == EDITPATTERN)
 	{
-		int x = 2 + 2 * char_width + SPACER;
+		int xx = 2 + 2 * char_width + SPACER;
 		for (int param = 0 ; param < mused.current_patternx ; ++param)
 		{
 			if (viscol(param)) 
 			{
-				x += (param > 0 && pattern_params[param].margin ? SPACER : 0) + pattern_params[param].w * char_width;
+				xx += (param > 0 && pattern_params[param].margin ? SPACER : 0) + pattern_params[param].w * char_width;
 			}
 		}
 		
-		if (pattern_params[mused.current_patternx].margin) x += SPACER;
+		if (pattern_params[mused.current_patternx].margin) xx += SPACER;
 		
 		if (mused.current_sequencetrack >= mused.pattern_horiz_position && mused.current_sequencetrack <= my_min(mused.song.num_channels, mused.pattern_horiz_position + 1 + (dest->w - w) / narrow_w) - 1)
 		{
-			SDL_Rect cursor = { 1 + dest->x + narrow_w * (mused.current_sequencetrack - mused.pattern_horiz_position) + x, row.y, pattern_params[mused.current_patternx].w * char_width, row.h};
+			SDL_Rect cursor = { 1 + dest->x + narrow_w * (mused.current_sequencetrack - mused.pattern_horiz_position) + xx, row.y, pattern_params[mused.current_patternx].w * char_width, row.h};
 			adjust_rect(&cursor, -2);
 			set_cursor(&cursor);
 		}
@@ -487,16 +487,16 @@ void pattern_view_inner(GfxDomain *dest_surface, const SDL_Rect *dest, const SDL
 	{
 		// hack to display cursor both in sequence editor and here
 		
-		int x = 0;
-		int w = char_width * 2;
+		int xx = 0;
+		int cw = char_width * 2;
 		
 		if (mused.flags & EDIT_SEQUENCE_DIGITS)
 		{
-			x = mused.sequence_digit * char_width;
-			w = char_width;
+			xx = mused.sequence_digit * char_width;
+			cw = char_width;
 		}
 		
-		SDL_Rect cursor = { 3 + dest->x + narrow_w * (mused.current_sequencetrack - mused.pattern_horiz_position) + x, row.y, w, row.h};
+		SDL_Rect cursor = { 3 + dest->x + narrow_w * (mused.current_sequencetrack - mused.pattern_horiz_position) + xx, row.y, cw, row.h};
 		adjust_rect(&cursor, -2);
 		bevelex(dest_surface, &cursor, mused.slider_bevel, (mused.flags & EDIT_MODE) ? BEV_EDIT_CURSOR : BEV_CURSOR, BEV_F_STRETCH_ALL);
 	}
@@ -567,8 +567,8 @@ static void pattern_view_stepcounter(GfxDomain *dest_surface, const SDL_Rect *de
 	{
 		if (mused.pattern_position == row)
 		{
-			SDL_Rect row = { content.x - 2, content.y + y - 1, content.w + 4, mused.console->font.h + 1};
-			bevelex(dest_surface,&row, mused.slider_bevel, BEV_SELECTED_PATTERN_ROW, BEV_F_STRETCH_ALL);
+			SDL_Rect rect_row = { content.x - 2, content.y + y - 1, content.w + 4, mused.console->font.h + 1};
+			bevelex(dest_surface, &rect_row, mused.slider_bevel, BEV_SELECTED_PATTERN_ROW, BEV_F_STRETCH_ALL);
 		}
 		
 		if (row < 0 || row >= mused.song.song_length)
