@@ -51,11 +51,9 @@ void import_module(void *type, void* unused1, void* unused2)
 	if (r == 0) return;
 	if (r == 1) 
 	{ 
-		int r;
-				
-		open_data(MAKEPTR(OD_T_SONG), MAKEPTR(OD_A_SAVE), &r);
-				
-		if (!r) return;
+		int rtn;
+		open_data(MAKEPTR(OD_T_SONG), MAKEPTR(OD_A_SAVE), &rtn);
+		if (!rtn) return;
 	}
 	
 	static const char *mod_name[] = {"a Protracker", "an AHX", "a FastTracker II", "a Cave Story", "a Rob Hubbard"};

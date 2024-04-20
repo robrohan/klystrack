@@ -179,7 +179,7 @@ int parse_key(const char *keys, int *key, int *mod, int *scancode)
 
 		if (scancode)
 		{
-			int _scancode = 0;
+			unsigned int _scancode = 0;
 
 			if (sscanf(tok, "S_%x", &_scancode) == 1)
 			{

@@ -907,7 +907,7 @@ void program_view(GfxDomain *dest_surface, const SDL_Rect *dest, const SDL_Event
 		else if (inst->program[i] != MUS_FX_NOP)
 		{
 			const InstructionDesc *d = get_instruction_desc(inst->program[i]);
-			if (d)
+			if (d != NULL)
 				console_write(mused.console, d->shortname ? d->shortname : d->name);
 		}
 

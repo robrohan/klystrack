@@ -110,7 +110,7 @@ const InstructionDesc * get_instruction_desc(Uint16 command)
 		}
 	}
 	
-	return false;
+	return NULL;
 }
 
 
@@ -170,7 +170,7 @@ Uint16 validate_command(Uint16 command)
 {
 	const InstructionDesc *i = get_instruction_desc(command);
 	
-	if (i)
+	if (i != NULL)
 	{
 		if (i->maxv != -1 && i->minv != -1)
 		{

@@ -91,7 +91,7 @@ void select_instrument_page(void *page, void *unused1, void *unused2)
 
 
 
-void select_instrument(void *idx, void *relative, void *pagey)
+void select_instrument(void *idx, const void *relative, const void *pagey)
 {
 	if (pagey)
 	{
@@ -170,7 +170,7 @@ void change_song_rate(void *delta, void *unused1, void *unused2)
 }
 
 
-void change_time_signature(void *beat, void *unused1, void *unused2)
+void change_time_signature(const void *beat, void *unused1, void *unused2)
 {
 	if (!beat)
 	{
@@ -185,7 +185,7 @@ void change_time_signature(void *beat, void *unused1, void *unused2)
 }
 
 
-void play(void *from_cursor, void *unused1, void *unused2)
+void play(const void *from_cursor, void *unused1, void *unused2)
 {
 	int pos = from_cursor ? mused.current_sequencepos : 0;
 	mused.play_start_at = get_playtime_at(pos);
@@ -235,7 +235,7 @@ void stop(void *unused1, void *unused2, void *unused3)
 }
 
 
-void change_song_speed(void *speed, void *delta, void *unused)
+void change_song_speed(const void *speed, void *delta, void *unused)
 {
 	if (!speed)
 	{
@@ -708,11 +708,11 @@ void export_channels_action(void *a, void*b, void*c)
 			char c_filename[1500], tmp[1000];
 			strncpy(tmp, filename, sizeof(tmp) - 1);
 
-			for (int c = strlen(tmp) - 1 ; c >= 0 ; --c)
+			for (int cc = strlen(tmp) - 1 ; cc >= 0 ; --cc)
 			{
-				if (tmp[c] == '.')
+				if (tmp[cc] == '.')
 				{
-					tmp[c] = '\0';
+					tmp[cc] = '\0';
 					break;
 				}
 			}

@@ -110,7 +110,7 @@ void init_recent_files_list()
 	recentmenu[0].text = strdup("No files");
 	recentmenu[0].p2 = (void*)1; // Magic value to catch this item
 
-	int list_count = 0;
+	// int list_count = 0;
 
 	debug("Loading recent files list");
 	char *e = expand_tilde("~/.klystrackrecent");
@@ -128,7 +128,7 @@ void init_recent_files_list()
 				if (!fgets(path, sizeof(path), f))
 					break;
 
-				sscanf(path, "%500[^\r\n]", cleaned);
+				sscanf(path, "%499[^\r\n]", cleaned);
 
 				Menu *menu = &recentmenu[i];
 				menu->parent = filemenu;
@@ -139,7 +139,7 @@ void init_recent_files_list()
 				menu->text = strdup(basename(cleaned));
 				menu->p2 = NULL;
 
-				list_count++;
+				// list_count++;
 			}
 
 			fclose(f);
