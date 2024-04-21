@@ -258,10 +258,10 @@ zip/data/SDL2.dll:
 objs.$(CFG)/windres.o: windres/* icon/*
 	windres -i windres/resource.rc -o $@
 
-
 mount_card:
 	lspci -knn | grep -iA2 card
 	ls -alFh /media/rob/2G/
 
 check:
 	cppcheck --enable=all --suppress=missingIncludeSystem ./src
+	cppcheck --enable=all --library=sdl --suppress=missingIncludeSystem ./klystron/src

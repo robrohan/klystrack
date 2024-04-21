@@ -252,7 +252,17 @@ void filebox_add_favorite(const char *path)
 {
 	if (filebox_is_favorite(path)) return;
 
-	favorites = realloc(favorites, (n_favorites + 1) * sizeof(char*));
+	void * tmp = realloc(favorites, (n_favorites + 1) * sizeof(char*));
+	if (NULL == tmp)
+	{
+		fprintf(stderr, "could not realloc favorites");
+		free(favorites);
+	}
+	else
+	{
+		favorites = tmp;
+	}
+
 	favorites[n_favorites] = strdup(path);
 
 	++n_favorites;
