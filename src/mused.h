@@ -59,9 +59,10 @@ enum
 #include "wavegen.h"
 #include "diskop.h"
 
-#define SCREEN_WIDTH 320
-#define SCREEN_HEIGHT 240
-
+// #define SCREEN_WIDTH 320
+// #define SCREEN_HEIGHT 240
+#define SCREEN_WIDTH 1280
+#define SCREEN_HEIGHT 720
 
 enum
 {

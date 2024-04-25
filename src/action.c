@@ -552,21 +552,26 @@ void toggle_pixel_scale(void *a, void*b, void*c)
 
 void change_pixel_scale(void *scale, void*b, void*c)
 {
-	mused.pixel_scale = CASTPTR(int,scale);
-	domain->screen_w = my_max(320, mused.window_w / mused.pixel_scale);
-	domain->screen_h = my_max(240, mused.window_h / mused.pixel_scale);
-	domain->scale = mused.pixel_scale;
-	gfx_domain_update(domain, true);
+	// mused.pixel_scale = CASTPTR(int,scale);
+	// // domain->screen_w = my_max(320, mused.window_w / mused.pixel_scale);
+	// // domain->screen_h = my_max(240, mused.window_h / mused.pixel_scale);
+	// domain->screen_w = my_max(320, mused.window_w / mused.pixel_scale);
+	// domain->screen_h = my_max(180, mused.window_h / mused.pixel_scale);
+	// // domain->screen_w = 1280;
+	// // domain->screen_h = 720;
 
-	set_scaled_cursor();
+	// domain->scale = mused.pixel_scale;
+	// gfx_domain_update(domain, true);
 
-	for (int i = 0 ; i < 4; ++i)
-	{
-		if (pixelmenu[i].p1 == scale)
-			pixelmenu[i].flags |= MENU_BULLET;
-		else
-			pixelmenu[i].flags &= ~MENU_BULLET;
-	}
+	// set_scaled_cursor();
+
+	// for (int i = 0 ; i < 4; ++i)
+	// {
+	// 	if (pixelmenu[i].p1 == scale)
+	// 		pixelmenu[i].flags |= MENU_BULLET;
+	// 	else
+	// 		pixelmenu[i].flags &= ~MENU_BULLET;
+	// }
 }
 
 

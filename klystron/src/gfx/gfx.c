@@ -595,13 +595,15 @@ void gfx_domain_update(GfxDomain *domain, bool resize_window)
 	GPU_SetWindowResolution(domain->screen_w * domain->scale, domain->screen_h * domain->scale);
 	GPU_SetVirtualResolution(domain->screen, domain->screen_w, domain->screen_h);
 
-	domain->window_w = domain->screen_w * domain->scale;
-	domain->window_h = domain->screen_h * domain->scale;
+	domain->window_w = domain->screen_w; // * domain->scale;
+	domain->window_h = domain->screen_h; // * domain->scale;
 
 #else
 
-	if (resize_window)
-		SDL_SetWindowSize(domain->window, domain->screen_w * domain->scale, domain->screen_h * domain->scale);
+	if (resize_window) {
+		// SDL_SetWindowSize(domain->window, domain->screen_w * domain->scale, domain->screen_h * domain->scale);
+		SDL_SetWindowSize(domain->window, domain->screen_w, domain->screen_h);
+	}
 
 	if (domain->fullscreen)
 	{
@@ -650,7 +652,8 @@ void gfx_domain_update(GfxDomain *domain, bool resize_window)
 
 	SDL_RenderSetViewport(domain->renderer, NULL);
 
-	SDL_SetWindowMinimumSize(domain->window, domain->window_min_w * domain->scale, domain->window_min_h * domain->scale);
+	// SDL_SetWindowMinimumSize(domain->window, domain->window_min_w * domain->scale, domain->window_min_h * domain->scale);
+	SDL_SetWindowMinimumSize(domain->window, domain->window_min_w, domain->window_min_h);
 	SDL_GetWindowSize(domain->window, &domain->window_w, &domain->window_h);
 #endif
 
